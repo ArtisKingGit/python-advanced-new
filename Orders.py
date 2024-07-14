@@ -3,6 +3,7 @@ import tkinter
 from PIL import Image
 from subprocess import call
 from tkinter import messagebox
+import psycopg2
 
 app = CTk()
 app.geometry("856x645")
@@ -38,19 +39,20 @@ def other_page():
     itemname_value = entry_item_name.get()
     customername_value = entry_customer_name.get()
     addressname_value = entry_address_name.get()
+    quantity = quauntity_frame_no
 
     if itemname_value == "" or customername_value == "" or addressname_value == "":
         messagebox.showwarning("Warning", "Input fields are empty")
     else:
         try:
-            print("Launching Orders_second.py")
-            call(["python", "Orders_second.py"])
+            conn = psycopg2.connect("dbname='postgres' user='postgres' password='asdfghj3' host='localhost' port='5432'")
+            cur = conn.cursor()
+            cur.execute('INSERT INTO orders(order_name, customer_name, address_name, quantity) VALUES (%s, %s, %s, %s)', (itemname_value, customername_value, addressname_value, quantity))
+            conn.commit()  # Commit the transaction
+            call(["python", "/Users/beginner/Desktop/Advanced Arthur/Python-Advanced-main/Orders_second.py"])
+
         except Exception as e:
             print(f"Error launching Orders_second.py: {e}")
-
-
-
-
 
 #Sidebar
 sidebar_frame = CTkFrame(master=app, fg_color="#2A8C55",  width=176, height=650, corner_radius=0)
@@ -61,7 +63,6 @@ sidebar_frame.pack(fill="y", anchor="w", side="left")
 logo_img_data = Image.open("logo.png")
 logo_img = CTkImage(dark_image=logo_img_data, light_image=logo_img_data, size=(77.68, 85.42))
 CTkLabel(master=sidebar_frame, text="", image=logo_img).pack(pady=(38, 0), anchor="center")
-
 
 #Dashboard
 analytics_img_data = Image.open("analytics_icon.png")
@@ -109,8 +110,6 @@ CTkLabel(master=main_view, text="Item Name", font=("Arial Bold", 17), text_color
 entry_item_name = CTkEntry(master=main_view, fg_color="#F0F0F0", border_width=0)
 entry_item_name.pack(fill="x", pady=(12,0), padx=27, ipady=10)
 
-
-
 grid = CTkFrame(master=main_view, fg_color="transparent")
 grid.pack(fill="both", padx=27, pady=(31,0))
 
@@ -139,21 +138,19 @@ quantity_frame.grid(row=7, column=0, pady=(21,0), sticky="w")
 
 #Quantity count buttons
 CTkButton(master=quantity_frame, text="-", width=25, fg_color="#2A8C55", hover_color="#207244", font=("Arial Black", 16), command = quantity_frame_count_subtraction).pack(side="left", anchor="w")
-#lbl_quantity_count = CTkLabel(master=quantity_frame, text="01", text_color="#2A8C55", font=("Arial Black", 16), command = quauntity_frame_count).pack(side="left", anchor="w", padx=10)
 lbl_quantity_count = CTkLabel(master=quantity_frame, text="01", text_color="#2A8C55", font=("Arial Black", 16))
 lbl_quantity_count.pack(side="left", anchor="w", padx=10)
 CTkButton(master=quantity_frame, text="+", width=25,  fg_color="#2A8C55",hover_color="#207244", font=("Arial Black", 16), command = quauntity_frame_count).pack(side="left", anchor="w")
 
 CTkLabel(master=grid, text="Description", font=("Arial Bold", 17), text_color="#52A476", justify="left").grid(row=2, column=1, sticky="w", pady=(42, 0), padx=(25,0))
 
-txtbox_description = CTkTextbox(master=grid, fg_color="#F0F0F0", width=300, corner_radius=8).grid(row=3, column=1, rowspan=5, sticky="w", pady=(16, 0), padx=(25,0), ipady=10)
+txtbox_description = CTkTextbox(master=grid, fg_color="#F0F0F0", width=300, corner_radius=8)
+txtbox_description.grid(row=3, column=1, rowspan=5, sticky="w", pady=(16, 0), padx=(25,0), ipady=10)
 
 actions= CTkFrame(master=main_view, fg_color="transparent")
 actions.pack(fill="both")
 
 CTkButton(master=actions, text="Back", width=300, fg_color="transparent", font=("Arial Bold", 17), border_color="#2A8C55", hover_color="#eee", border_width=2, text_color="#2A8C55").pack(side="left", anchor="sw", pady=(30,0), padx=(27,24))
 CTkButton(master=actions, text="Create", width=300, font=("Arial Bold", 17), hover_color="#207244", fg_color="#2A8C55", text_color="#fff", command = other_page).pack(side = "left", anchor="se", pady=(30,0), padx=(0,27))
-
-
 
 app.mainloop()

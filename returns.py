@@ -3,6 +3,8 @@ import tkinter
 from CTkTable import CTkTable
 from PIL import Image
 from subprocess import call
+from tkinter import messagebox
+import psycopg2
 
 app = CTk()
 app.geometry("856x645")
@@ -23,6 +25,25 @@ def open_settings():
     
 def open_dashboard():
     call(["python", "Dashboard.py"])
+
+def other_page():
+    customer_name = customer_name_value.get()
+    item_name = combobox.get()
+    item_quantity = item_quantity_value.get()
+    address_name = address_value.get()
+
+    if customer_name == "" or item_name == "" or item_quantity == "" or address_name =="":
+        messagebox.showwarning("Warning", "Input fields are empty")
+    else:
+        try:
+            conn = psycopg2.connect("dbname='postgres' user='postgres' password='asdfghj3' host='localhost' port='5432'")
+            cur = conn.cursor()
+            cur.execute('INSERT INTO orders(order_name, customer_name, address_name, quantity) VALUES (%s, %s, %s, %s)', (customer_name, item_name, item_quantity, ))
+            conn.commit()  # Commit the transaction
+            call(["python", "/Users/beginner/Desktop/Advanced Arthur/Python-Advanced-main/Orders_second.py"])
+
+        except Exception as e:
+            print(f"Error launching Orders_second.py: {e}")
 
 #Sidebar- main
 sidebar_frame = CTkFrame(master=app, fg_color="#2A8C55",  width=176, height=650, corner_radius=0)
@@ -76,15 +97,15 @@ main_view.pack(side="left")
 
 CTkLabel(master= main_view, text = "Returns", font = ("Arial Bold", 25), text_color= "#207244").pack(anchor = "nw", pady= (20, 0), padx = 24)
 
-CTkEntry(master = main_view, placeholder_text= "Customer name...", width = 250, font = ("Arial Bold", 14), border_width= 3, border_color= "#207244").pack(anchor = "nw", pady =(22, 0), padx = 24)
+customer_name_value = CTkEntry(master = main_view, placeholder_text= "Customer name...", width = 250, font = ("Arial Bold", 14), border_width= 3, border_color= "#207244").pack(anchor = "nw", pady =(22, 0), padx = 24)
 
 combobox_values = ["Pencil", "Chemistry book", "Debit Card", "Mackbook pro", "Camera", "Printer", "Smartwatch", "Football", "Monitor", "External hard drive", "Other"]
 
-CTkComboBox(master = main_view, values= combobox_values, width = 150,border_width= 3, border_color= "#207244").pack(anchor = "nw", pady = (23,0), padx = 24)
+combobox = CTkComboBox(master = main_view, values= combobox_values, width = 150,border_width= 3, border_color= "#207244").pack(anchor = "nw", pady = (23,0), padx = 24)
 
-CTkEntry(master = main_view, placeholder_text= "Item quantity...", width = 250, font = ("Arial Bold", 14), border_width= 3, border_color= "#207244").pack(anchor = "nw", pady =(23, 0), padx = 24)
+item_quantity_value =CTkEntry(master = main_view, placeholder_text= "Item quantity...", width = 250, font = ("Arial Bold", 14), border_width= 3, border_color= "#207244").pack(anchor = "nw", pady =(23, 0), padx = 24)
 
-CTkEntry(master = main_view, placeholder_text= "Your address...", width = 250, font = ("Arial Bold", 14), border_width= 3, border_color= "#207244").pack(anchor = "nw", pady =(24, 0), padx = 24)
+address_value =CTkEntry(master = main_view, placeholder_text= "Your address...", width = 250, font = ("Arial Bold", 14), border_width= 3, border_color= "#207244").pack(anchor = "nw", pady =(24, 0), padx = 24)
 
 package_img_data_2 = Image.open("package_icon.png")
 package_img_2 = CTkImage(dark_image= package_img_data_2, light_image= package_img_data_2 )
