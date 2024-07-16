@@ -25,9 +25,6 @@ img_logo_data = Image.open("poopoo.jpeg")
 img_logo = CTkImage(dark_image=img_logo_data, light_image=img_logo_data, size=(330, 650))
 CTkLabel(master=sidebar_frame, text="", image=img_logo).pack(anchor="center")
 
-#img_logo2_data = Image.open("Detail drawing mechanical parts.jpeg")
-img_logo2 = CTkImage(dark_image=img_logo2_data, light_image=img_logo2_data, size=(526, 645))
-sidebar_frame2.configure(bg =")
 
 # Function to open login form
 def call():
