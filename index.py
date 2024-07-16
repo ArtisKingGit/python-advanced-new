@@ -20,9 +20,14 @@ sidebar_frame2 = CTkFrame(master=window, fg_color="transparent", width=526, heig
 sidebar_frame2.pack_propagate(0)
 sidebar_frame2.pack(fill="y", anchor="center")
 
+
 img_logo_data = Image.open("poopoo.jpeg")
 img_logo = CTkImage(dark_image=img_logo_data, light_image=img_logo_data, size=(330, 650))
 CTkLabel(master=sidebar_frame, text="", image=img_logo).pack(anchor="center")
+
+#img_logo2_data = Image.open("Detail drawing mechanical parts.jpeg")
+img_logo2 = CTkImage(dark_image=img_logo2_data, light_image=img_logo2_data, size=(526, 645))
+sidebar_frame2.configure(bg =")
 
 # Function to open login form
 def call():
@@ -106,11 +111,12 @@ registpass_entry.pack(pady=10)
 registpassconfirm_entry = CTkEntry(sidebar_frame2, width=300, placeholder_text="Confirm password...", border_color="grey",corner_radius= 10, show = "*")
 registpassconfirm_entry.pack(pady=10)
 
-btn_regist = CTkButton(sidebar_frame2, width=300,height=40, text_color="Black", font=("Arial", 20), fg_color="#fff", border_width=3, border_color="#207244", text="Register",corner_radius= 10, command=opensecondarywindow)
-btn_regist.pack(pady=10)
+img_regist = Image.open("register.png")
+btn_regist = CTkButton(sidebar_frame2, width=300,height=40, text_color="Black", font=("Arial", 20), fg_color="#fff", border_width=3, border_color="#207244", text="Register",corner_radius= 10,image=CTkImage(dark_image= img_regist), command=opensecondarywindow)
+btn_regist.pack(pady=50)
 
 grid = CTkButton(sidebar_frame2, text_color="Black",height=20, width=300, font=("Arial", 16), text="Already have an account? Sign in here", fg_color="#fff", border_width=3,corner_radius= 10, border_color="#207244", command=call)
-grid.pack(pady=30)
+grid.pack(pady=10)
 
 # Centering buttons
 btn_regist.pack(pady=(50, 10), anchor="center")
