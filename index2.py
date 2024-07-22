@@ -76,7 +76,7 @@ btn_login.pack(pady=10)
 
 
 
-img_logo_data = Image.open("poopoo.jpeg")
+img_logo_data = Image.open("MuchaTseBle.jpeg")
 img_logo = CTkImage(dark_image=img_logo_data, light_image=img_logo_data, size=(330, 650))
 CTkLabel(master=sidebar_frame, text="", image=img_logo).pack(anchor="center")
 
