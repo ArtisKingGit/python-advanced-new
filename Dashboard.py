@@ -1,7 +1,7 @@
 from customtkinter import *
 from CTkTable import CTkTable
 from PIL import Image
-from subprocess import call
+import subprocess
 
 
 app = CTk()
@@ -15,19 +15,31 @@ set_appearance_mode("light")
 
 def open_orders():
     app.destroy()
-    call(["python", "Orders.py"])
+    try:
+        subprocess.Popen(["python", "/Users/beginner/Desktop/Advanced Arthur/Python-Advanced-main/Orders.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
     
 def open_feedback():
-    app.destroy()  # Destroy the current window
-    call(["python", "feedback.py"])
+    app.destroy()
+    try:
+        subprocess.Popen(["python", "/Users/beginner/Desktop/Advanced Arthur/Python-Advanced-main/feedback.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
     
 def open_settings():
     app.destroy()
-    call(["python", "settings.py"])
+    try:
+        subprocess.Popen(["python", "/Users/beginner/Desktop/Advanced Arthur/Python-Advanced-main/settings.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
     
 def open_returns():
     app.destroy()
-    call(["python", "returns.py"])
+    try:
+        subprocess.Popen(["python", "/Users/beginner/Desktop/Advanced Arthur/Python-Advanced-main/returns.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
     
 sidebar_frame = CTkFrame(master=app, fg_color="#2A8C55", width=176, height=650, corner_radius=0)
 sidebar_frame.pack_propagate(0)

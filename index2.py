@@ -18,6 +18,13 @@ def call():
     except subprocess.CalledProcessError as e:
         print("Error executing Dashboard.py:", e)
 
+def call2():
+    Login_Form.destroy()
+    try:
+        subprocess.Popen(["python", "/Users/beginner/Desktop/Advanced Arthur/Python-Advanced-main/index.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing index.py:", e)
+
 # Function to handle login attempt
 def login_attempt(username, password):
     try:
@@ -58,8 +65,8 @@ sidebar_frame = CTkFrame(master=Login_Form, fg_color="transparent", width=330, h
 sidebar_frame.pack_propagate(0)
 sidebar_frame.pack(anchor="nw", side="left")
 
-lbl_welcome =CTkLabel(master=sidebar_frame2, text="Welcome Again User", font=("Arial", 30) )
-lbl_welcome.pack(pady=50)
+lbl_welcome =CTkLabel(master=sidebar_frame2, text="Welcome Back!", font=("Arial",40) )
+lbl_welcome.pack(pady=50, padx = 10)
 
 login_entry = CTkEntry(master=sidebar_frame2, width=300, placeholder_text="Enter username...", corner_radius=10)
 login_entry.pack(pady=10)
@@ -67,12 +74,23 @@ login_entry.pack(pady=10)
 password_entry = CTkEntry(master=sidebar_frame2, width=300, placeholder_text="Enter password...", show="*", corner_radius= 10)
 password_entry.pack(pady=10)
 
-btn_login2 = CTkButton(master=sidebar_frame2, width=300, height= 40, font=("Arial", 16), text_color="Black", fg_color="#fff", border_width=3,corner_radius=10, border_color="#207244", text="Login", command=lambda: login_attempt(login_entry.get(), password_entry.get()))
+btn_login2 = CTkButton(master=sidebar_frame2,hover_color= "#b5b5b5", width=300, height= 40, font=("Arial", 16), text_color="Black", fg_color="#fff", border_width=3,corner_radius=10, border_color="#207244", text="Login", command=lambda: login_attempt(login_entry.get(), password_entry.get()))
 btn_login2.pack(pady=10)
 
 img_google = Image.open("google.png")
-btn_login = CTkButton(master=sidebar_frame2, width=300,height= 40, corner_radius=10,text_color="Black", font=("Arial", 16), fg_color="#fff", border_width=3, border_color="#207244", text="Login With Google", image=CTkImage(dark_image=img_google))
+btn_login = CTkButton(master=sidebar_frame2,hover_color= "#b5b5b5", width=300,height= 40, corner_radius=10,text_color="Black", font=("Arial", 16), fg_color="#fff", border_width=3, border_color="#207244", text="Login With Google", image=CTkImage(dark_image=img_google))
 btn_login.pack(pady=10)
+
+img_facebook = Image.open("facebook.png")
+btn_login3 = CTkButton(master=sidebar_frame2,hover_color= "#b5b5b5", width=300, height= 40, font=("Arial", 16), text_color="Black", fg_color="#fff", border_width=3,corner_radius=10, border_color="#207244", text="Login with Facebook", image=CTkImage(dark_image=img_facebook))
+btn_login3.pack(pady=10)
+
+img_apple = Image.open("apple.png")
+btn_login4 = CTkButton(master=sidebar_frame2,hover_color= "#b5b5b5", width=300, height= 40, font=("Arial", 16), text_color="Black", fg_color="#fff", border_width=3,corner_radius=10, border_color="#207244", text="Login with Apple", image=CTkImage(dark_image=img_apple))
+btn_login4.pack(pady=10)
+
+btn_login5 = CTkButton(master=sidebar_frame2,hover_color= "#b5b5b5",  width=300, height= 10, font=("Arial", 16), text_color="Black", fg_color="#fff", border_width=3,corner_radius=100, border_color="#207244", text="Don't have an account? Create an Account", command = call2)
+btn_login5.pack(pady=10)
 
 
 
