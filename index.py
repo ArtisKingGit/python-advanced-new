@@ -50,6 +50,7 @@ def opensecondarywindow():
             cur.execute('INSERT INTO names(username, pass) VALUES (%s, %s)', (username, password))
             conn.commit()  # Commit the transaction
             messagebox.showinfo("Success", "Registration successful!")
+            btn_regist._state("disabled")
             call()
 
         except (psycopg2.DatabaseError, psycopg2.Error) as e:
@@ -109,7 +110,7 @@ registpassconfirm_entry = CTkEntry(sidebar_frame2, width=300, placeholder_text="
 registpassconfirm_entry.pack(pady=10)
 
 img_regist = Image.open("register.png")
-btn_regist = CTkButton(sidebar_frame2, width=300,height=40, text_color="Black", font=("Arial", 20), fg_color="#fff", border_width=3, border_color="#207244", text="Register",corner_radius= 10,image=CTkImage(dark_image= img_regist), command=opensecondarywindow)
+btn_regist = CTkButton(sidebar_frame2, width=300,height=40,border_spacing= 10,text_color="Black", font=("Arial", 20), fg_color="#fff", border_width=3, border_color="#207244", text="Register",corner_radius= 10,image=CTkImage(dark_image= img_regist), command=opensecondarywindow)
 btn_regist.pack(pady=50)
 
 grid = CTkButton(sidebar_frame2, text_color="Black",height=20, width=300, font=("Arial", 16), text="Already have an account? Sign in here", fg_color="#fff", border_width=3,corner_radius= 10, border_color="#207244", command=call)
