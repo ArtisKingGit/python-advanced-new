@@ -100,13 +100,13 @@ def login_attempt(username, password):
 lbl_welcome =CTkLabel(master=sidebar_frame2, text="Register Your User", font=("Arial", 30))
 lbl_welcome.pack(pady=50)
 
-regist_entry = CTkEntry(sidebar_frame2, width=300, placeholder_text="Enter username...", border_color="grey", corner_radius= 10,)
+regist_entry = CTkEntry(sidebar_frame2, width=400,height=40,border_width=3, placeholder_text="Enter username...", border_color="#207244", corner_radius= 10,)
 regist_entry.pack(pady=10)
 
-registpass_entry = CTkEntry(sidebar_frame2, width=300, placeholder_text="Enter password...", border_color="grey", corner_radius= 10, show = "*")
+registpass_entry = CTkEntry(sidebar_frame2, width=400,height=40,border_width=3, placeholder_text="Enter password...", border_color="#207244", corner_radius= 10, show = "*")
 registpass_entry.pack(pady=10)
 
-registpassconfirm_entry = CTkEntry(sidebar_frame2, width=300, placeholder_text="Confirm password...", border_color="grey",corner_radius= 10, show = "*")
+registpassconfirm_entry = CTkEntry(sidebar_frame2, width=400,height=40, border_width=3,placeholder_text="Confirm password...", border_color="#201244",corner_radius= 10, show = "*")
 registpassconfirm_entry.pack(pady=10)
 
 img_regist = Image.open("register.png")
