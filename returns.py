@@ -2,7 +2,7 @@ from customtkinter import *
 import tkinter
 from CTkTable import CTkTable
 from PIL import Image
-from subprocess import call
+import subprocess
 from tkinter import messagebox
 import psycopg2
 
@@ -15,16 +15,32 @@ set_appearance_mode("light")
 ###########The Left hand side panel with the apps are in here -->>###########
 
 def open_orders():
-    call(["python", "Orders.py"])
+    app.destroy()
+    try:
+        subprocess.Popen(["python", "Orders.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
     
 def open_feedback():
-    call(["python", "feedback.py"])
+    app.destroy()
+    try:
+        subprocess.Popen(["python", "feedback.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
     
 def open_settings():
-    call(["python", "settings.py"])
+    app.destroy()
+    try:
+        subprocess.Popen(["python", "settings.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
     
 def open_dashboard():
-    call(["python", "Dashboard.py"])
+    app.destroy()
+    try:
+        subprocess.Popen(["python", "Dashboard.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
 
 def other_page():
     customer_name = customer_name_value.get()

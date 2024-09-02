@@ -1,7 +1,7 @@
 from customtkinter import *
 import tkinter
 from PIL import Image
-from subprocess import call
+import subprocess
 from tkinter import messagebox
 import psycopg2
 
@@ -12,16 +12,32 @@ app.resizable(0,0)
 set_appearance_mode("light")
     
 def open_feedback():
-    call(["python", "feedback.py"])
+    app.destroy()
+    try:
+        subprocess.Popen(["python", "feedback.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
     
 def open_settings():
-    call(["python", "settings.py"])
+    app.destroy()
+    try:
+        subprocess.Popen(["python", "settings.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
     
 def open_returns():
-    call(["python", "returns.py"])
+    app.destroy()
+    try:
+        subprocess.Popen(["python", "returns.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
     
 def open_dashboard():
-    call(["python", "Dashboard.py"])
+    app.destroy()
+    try:
+        subprocess.Popen(["python", "Dashboard.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
 
 
 quauntity_frame_no = 1

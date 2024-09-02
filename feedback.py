@@ -1,6 +1,6 @@
 from customtkinter import *
 from PIL import Image
-from subprocess import call
+import subprocess
 
 # Create the tkinter app instance
 app = CTk()
@@ -11,19 +11,36 @@ set_appearance_mode("light")
 
 # Function to open Orders.py
 def open_orders():
-    call(["python", "Orders.py"])
+    app.destroy()
+    try:
+        subprocess.Popen(["python", "Orders.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
+
 
 # Function to open Settings.py
 def open_settings():
-    call(["python", "settings.py"])
+    app.destroy()
+    try:
+        subprocess.Popen(["python", "settings.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
 
 # Function to open Returns.py
 def open_returns():
-    call(["python", "returns.py"])
+    app.destroy()
+    try:
+        subprocess.Popen(["python", "returns.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
 
 # Function to open Dashboard.py
 def open_dashboard():
-    call(["python", "Dashboard.py"])
+    app.destroy()
+    try:
+        subprocess.Popen(["python", "Dashboard.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
 
 # Sidebar with buttons
 sidebar_frame = CTkFrame(master=app, fg_color="#2A8C55", width=176, height=650, corner_radius=0)

@@ -1,7 +1,7 @@
 from customtkinter import *
 from tkinter import *
 from PIL import Image
-from subprocess import call
+import subprocess
 
 app = CTk()
 app.geometry("856x645")
@@ -28,17 +28,33 @@ def change_mode(choice):
         main_view.configure(master=app, fg_color="#fff",  width=680, height=650, corner_radius=0)
         
 def open_orders():
-        call(["python", "Orders.py"])
+    app.destroy()
+    try:
+        subprocess.Popen(["python", "Orders.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
         
     
 def open_feedback():
-    call(["python", "feedback.py"])
+    app.destroy()
+    try:
+        subprocess.Popen(["python", "feedback.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
     
 def open_returns():
-    call(["python", "returns.py"])
+    app.destroy()
+    try:
+        subprocess.Popen(["python", "returns.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
     
 def open_dashboard():
-    call(["python", "Dashboard.py"])
+    app.destroy()
+    try:
+        subprocess.Popen(["python", "Dashboard.py"])
+    except subprocess.CalledProcessError as e:
+        print("Error executing Dashboard.py:", e)
         
         
  
