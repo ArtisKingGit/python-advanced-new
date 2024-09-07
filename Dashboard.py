@@ -2,6 +2,7 @@ from customtkinter import *
 from CTkTable import CTkTable
 from PIL import Image
 import subprocess
+import psycopg2
 
 
 app = CTk()
@@ -12,7 +13,32 @@ app.title("School Bookshop")
 set_appearance_mode("light")
 
 
+def fetch_orders_data():
+    try:
+        conn = psycopg2.connect("dbname='postgres' user='postgres' password='asdfghj3' host='localhost' port='5432'")
+        cur = conn.cursor()
 
+        # Execute the query to fetch data from the orders table
+        cur.execute('SELECT order_name, customer_name, address_name, quantity FROM orders')
+
+        # Fetch all rows
+        orders_data = cur.fetchall()
+        
+        # Add header to the data
+        table_data = [["Order Name", "Customer Name", "Address", "Quantity"]] + [list(row) for row in orders_data]
+
+        return table_data
+
+    except (psycopg2.DatabaseError, psycopg2.Error) as e:
+        messagebox.showerror("Error", f"Database error: {e}")
+        return []
+
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+            
 def open_orders():
     app.destroy()
     try:
@@ -150,32 +176,15 @@ CTkComboBox(master=search_container, width=125, values=["Date", "Most Recent Ord
 CTkComboBox(master=search_container, width=125, values=["Status", "Processing", "Confirmed", "Packing", "Shipping", "Delivered", "Cancelled"], button_color="#2A8C55", border_color="#2A8C55", border_width=2, button_hover_color="#207244",dropdown_hover_color="#207244" , dropdown_fg_color="#2A8C55", dropdown_text_color="#fff").pack(side="left", padx=(13, 0), pady=15)
 
 #Tables
-table_data = [
-    ["Order ID", "Item Name", "Customer", "Address", "Status", "Quantity"],
-    ['3833', 'Smartphone', 'Arthur', '123 main St', 'Confirmed', '8'],
-    ['6432', 'Laptop', 'Patrick', '456 Elm St', 'Packing', '5'],
-    ['2180', 'Tablet', 'Jacinta', '789 Oak St', 'Delivered', '1'],
-    ['5438', 'Headphones', 'Zedi', '101 Pine St', 'Confirmed', '9'],
-    ['9144', 'Camera', 'Boniface', '202 Cedar St', 'Processing', '2'],
-    ['7689', 'Printer', 'Nathan', '303 Maple St', 'Cancelled', '2'],
-    ['1323', 'Smartwatch', 'Jumba', '404 Birch St', 'Shipping', '6'],
-    ['7391', 'Keyboard', 'Curtis', '505 Redwood St', 'Cancelled', '10'],
-    ['4915', 'Monitor', 'Benjamin', '606 Fir St', 'Shipping', '6'],
-    ['5548', 'External Hard Drive', 'Baraka', '707 Oak St', 'Delivered', '10'],
-    ['5485', 'Table Lamp', 'Alvie', '808 Pine St', 'Confirmed', '4'],
-    ['7764', 'Desk Chair', 'Kaice', '909 Cedar St', 'Processing', '9'],
-    ['8252', 'Coffee Maker', 'Stanley', '1010 Elm St', 'Confirmed', '6'],
-    ['2377', 'Blender', 'Lincon', '1111 Redwood St', 'Shipping', '2'],
-    ['5287', 'Toaster', 'Ty Barack', '1212 Maple St', 'Processing', '1'],
-    ['7739', 'Microwave', 'Jijo', '1313 Cedar St', 'Confirmed', '8'],
-    ['3129', 'Refrigerator', 'Morgan', '1414 Oak St', 'Processing', '5'],
-    ['4789', 'Vacuum Cleaner', 'Armon James', '1515 Pine St', 'Cancelled', '10']
-]
+# Tables
+table_data = fetch_orders_data()
 
 table_frame = CTkScrollableFrame(master=main_view, fg_color="transparent")
 table_frame.pack(expand=True, fill="both", padx=27, pady=21)
+
 table = CTkTable(master=table_frame, values=table_data, colors=["#E6E6E6", "#EEEEEE"], header_color="#2A8C55", hover_color="#B4B4B4")
 table.edit_row(0, text_color="#fff", hover_color="#2A8C55")
 table.pack(expand=True)
+
 
 app.mainloop()
