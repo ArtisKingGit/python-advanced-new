@@ -10,9 +10,9 @@ app.geometry("856x645")
 app.resizable(0,0)
 app.title("School Bookshop")
 
-set_appearance_mode("light")
+set_appearance_mode("light") 
 
-
+        
 def fetch_orders_data():
     try:
         conn = psycopg2.connect("dbname='postgres' user='postgres' password='asdfghj3' host='localhost' port='5432'")
@@ -153,7 +153,8 @@ shipping_img = CTkImage(light_image=shipping_img_data, dark_image=shipping_img_d
 CTkLabel(master=shipped_metric, image=shipping_img, text="").grid(row=0, column=0, rowspan=2, padx=(12,5), pady=10)
 
 CTkLabel(master=shipped_metric, text="Shipping", text_color="#fff", font=("Arial Black", 15)).grid(row=0, column=1, sticky="sw")
-CTkLabel(master=shipped_metric, text="91", text_color="#fff",font=("Arial Black", 15), justify="left").grid(row=1, column=1, sticky="nw", pady=(0,10))
+##########
+lbl_text = CTkLabel(master=shipped_metric, text="91", text_color="#fff",font=("Arial Black", 15), justify="left").grid(row=1, column=1, sticky="nw", pady=(0,10))
 
 delivered_metric = CTkFrame(master=metrics_frame, fg_color="#2A8C55", width=200, height=60)
 delivered_metric.grid_propagate(0)
