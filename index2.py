@@ -77,7 +77,7 @@ password_entry.pack(pady=10)
 btn_login2 = CTkButton(master=sidebar_frame2,hover_color= "#b5b5b5", width=300, height= 40, font=("Arial", 16), text_color="Black", fg_color="#fff", border_width=3,corner_radius=10, border_color="#207244", text="Login", command=lambda: login_attempt(login_entry.get(), password_entry.get()))
 btn_login2.pack(pady=10)
 
-img_google = Image.open("google.png")
+img_google = Image.open("/Users/beginner/Desktop/Advanced Arthur/Python-Advanced-main/google.png")
 btn_login = CTkButton(master=sidebar_frame2,hover_color= "#b5b5b5", width=300,height= 40, corner_radius=10,text_color="Black", font=("Arial", 16), fg_color="#fff", border_width=3, border_color="#207244", text="Login With Google", image=CTkImage(dark_image=img_google))
 btn_login.pack(pady=10)
 
