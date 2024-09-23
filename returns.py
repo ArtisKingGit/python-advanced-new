@@ -36,7 +36,11 @@ def open_settings():
         print("Error executing Dashboard.py:", e)
     
 def open_dashboard():
-    app.destroy()
+    app.destroy()-def RORO():
+        """
+        Purpose: 
+        """
+        
     try:
         subprocess.Popen(["python", "Dashboard.py"])
     except subprocess.CalledProcessError as e:

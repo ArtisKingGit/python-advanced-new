@@ -9,7 +9,6 @@ Login_Form = CTk()
 Login_Form.title("School Bookshop Login")
 Login_Form.geometry("856x645")
 set_appearance_mode("dark")
-
 # Function to call Dashboard.py and destroy the login window
 def call():
     Login_Form.destroy()
@@ -99,3 +98,4 @@ img_logo = CTkImage(dark_image=img_logo_data, light_image=img_logo_data, size=(3
 CTkLabel(master=sidebar_frame, text="", image=img_logo).pack(anchor="center")
 
 Login_Form.mainloop()
+
