@@ -96,6 +96,10 @@ def login_attempt(username, password):
         if conn:
             conn.close()
 
+def keyhandlerevent(event):
+    try:
+        login_attempt()
+
 # Widgets for registration form
 lbl_welcome =CTkLabel(master=sidebar_frame2, text="Register Your User", font=("Arial", 30))
 lbl_welcome.pack(pady=50)
@@ -119,5 +123,7 @@ grid.pack(pady=10)
 # Centering buttons
 btn_regist.pack(pady=(50, 10), anchor="center")
 grid.pack(pady=(10, 50), anchor="center")
+
+window.bind("<Return>", )
 
 window.mainloop()

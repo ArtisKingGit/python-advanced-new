@@ -54,7 +54,14 @@ def login_attempt(username, password):
             cur.close()
         if conn:
             conn.close()
+            
+def keyhandlerfunction(event):
+   try:
+       login_attempt(login_entry.get(), password_entry.get())
+   except Exception as e:
+       print("Error, Failed.", e)
 
+            
 # Sidebar frames and widgets
 sidebar_frame2 = CTkFrame(master=Login_Form, fg_color="transparent", width=526, height=645, corner_radius=10, border_color="#000", border_width=5)
 sidebar_frame2.pack_propagate(0)
@@ -91,11 +98,11 @@ btn_login4.pack(pady=10)
 btn_login5 = CTkButton(master=sidebar_frame2,hover_color= "#b5b5b5",  width=300, height= 10, font=("Arial", 16), text_color="Black", fg_color="#fff", border_width=3,corner_radius=100, border_color="#207244", text="Don't have an account? Create an Account", command = call2)
 btn_login5.pack(pady=10)
 
-
-
 img_logo_data = Image.open("MuchaTseBle.jpeg")
 img_logo = CTkImage(dark_image=img_logo_data, light_image=img_logo_data, size=(330, 650))
 CTkLabel(master=sidebar_frame, text="", image=img_logo).pack(anchor="center")
+
+Login_Form.bind("<Return>", keyhandlerfunction)
 
 Login_Form.mainloop()
 
