@@ -96,9 +96,6 @@ def login_attempt(username, password):
         if conn:
             conn.close()
 
-def keyhandlerevent(event):
-    try:
-        login_attempt()
 
 # Widgets for registration form
 lbl_welcome =CTkLabel(master=sidebar_frame2, text="Register Your User", font=("Arial", 30))
